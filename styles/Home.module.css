@@ -3,7 +3,7 @@
 }
 
 .main {
-  width: 75vw;
+  width: 80vw;
   margin: auto;
   min-height: 100vh;
   padding: 4rem 0;
@@ -52,6 +52,7 @@
   min-width: 95% !important;
   opacity: 0.95;
   animation: moveLeft 7s ease-in-out 2s infinite;
+  perspective: 600px;
   filter: 
     drop-shadow(2px 3.5px 5px rgba(19, 99, 223, 0.5))
     drop-shadow(-1.5px -1px 1.5px rgba(19, 99, 223, 0.5))
@@ -59,7 +60,7 @@
 }
 
 .main h1 {
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
 }
 
 .main p {

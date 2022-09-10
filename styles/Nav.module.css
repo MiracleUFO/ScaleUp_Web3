@@ -1,0 +1,48 @@
+.nav {
+    position: absolute;
+    width: 50vw;
+    bottom: 0;
+    top: 90vh;
+    height: fit-content;
+    border-radius: 24px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.09);
+    z-index: 200;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav > * {
+    width: 100%;
+    height: 5vh;
+    display: block;
+    z-index: 200;
+}
+
+.nav > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+}
+
+.nav > .active {
+    background-color: rgba(124, 131, 253);
+}
+
+.nav svg {
+    font-size: 1.2em;
+}
+
+@media (min-width: 750px) {
+    .nav {
+        top: 45vh;
+        width: 5vw;
+        flex-direction: column;
+    }
+
+    .nav > span {
+        margin: 1.2vh 0;
+    }
+}
