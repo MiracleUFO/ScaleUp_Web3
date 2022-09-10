@@ -1,0 +1,146 @@
+.container {
+  padding: 0 2rem;
+}
+
+.main {
+  width: 75vw;
+  margin: auto;
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 750px) {
+  .main {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.main > div:first-child {
+  min-width: 50%;
+  width: fit-content;
+  font-size: 1.1em;
+  font-family: 'Rubik', sans-serif;
+  color: aliceblue;
+}
+
+.main > div:nth-child(2) {
+  width: 38%;
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: scaleX(1) rotateZ(0deg) translateX(0);
+  }
+  50% {
+    transform: scale(1.14) rotateZ(12deg) translateX(-1%);
+  }
+  75% {
+    transform: scaleX(1) rotateZ(5deg) translateX(0);
+  }
+  100% {
+    transform: scale(1) rotateZ(0deg) translateX(0);
+  }
+}
+
+.main img {
+  min-width: 95% !important;
+  opacity: 0.95;
+  animation: moveLeft 7s ease-in-out 2s infinite;
+  filter: 
+    drop-shadow(2px 3.5px 5px rgba(19, 99, 223, 0.5))
+    drop-shadow(-1.5px -1px 1.5px rgba(19, 99, 223, 0.5))
+  ;
+}
+
+.main h1 {
+  letter-spacing: 1.5px;
+}
+
+.main p {
+  color: rgba(240, 248, 255, 0.9);
+  line-height: 32px;
+  padding-left: 0.3em;
+}
+
+.main button {
+  padding: 10px 14px !important;
+  height: fit-content !important;
+  margin-top: 10px !important;
+}
+
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  margin: 4rem 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
+  }
+}
