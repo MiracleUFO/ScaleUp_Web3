@@ -8,7 +8,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['res.cloudinary.com', 'blush.design', 'tokens.buildspace.so', 'ipfs.io'],
+    domains: [
+      'blush.design',
+      'tokens.buildspace.so',
+      'ipfs.io'
+    ],
   }
 }
 

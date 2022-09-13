@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dicebear/avatars": "^4.10.3",
     "@dicebear/avatars-bottts-sprites": "^4.10.3",
-    "@dicebear/avatars-male-sprites": "^4.10.3",
     "@rainbow-me/rainbowkit": "^0.5.1",
     "animate.css": "^4.1.1",
     "ethers": "^5.7.0",

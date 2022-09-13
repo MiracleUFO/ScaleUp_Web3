@@ -10,7 +10,7 @@ import { randomSeed } from '../helpers/randomSeed'
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-bottts-sprites';
 
-import { CgMaximize, CgMinimize } from 'react-icons/cg'
+import { CgMaximize } from 'react-icons/cg'
 import Image from 'next/future/image'
 
 import NavBar from '../components/NavBar'
@@ -108,58 +108,62 @@ const User: NextPage = () => {
         }
     },[minimizeAll])
 
-    return (
-        <div className={styles.container} onClick={minimizeAll}>
-            <NavBar />
-            <main className={styles.main}>
-                {showRobbo ?
-                    <div id='user-avatar-container' className={`${styles.imgContainer}`}>
-                        {avatar ? 
-                            <Image 
-                                src={avatar}
-                                alt='User random generated avatar'
-                                width={250}
-                                height={300}
-                            /> 
-                        :   null}
-                        <span className={styles.address}>#{address}</span>
-                    </div>
-                :   <>
-                        <h1 className={`${styles.address} ${styles.header}`}>NFTS</h1>
-                        <div className={styles.nftsContainer}>
-                            {nfts.map((nft, index) => {
-                                const path = nft?.file_url.replace('ipfs://', 'https://ipfs.io/ipfs/')
-                                return (
-                                    isImageUrl(path) ?
-                                        <div
-                                            key={index}
-                                            className={`${styles.frame} animate__animated animate__fadeIn animate__delay-1s`}
-                                        >
-                                            <Image 
-                                                src={path}
-                                                alt={nft?.name}
-                                                width={246}
-                                                height={154}
-                                            />
-                                            <span onClick={maximizeImg} className='max'><CgMaximize /></span>
-                                        </div>
-                                    : 
-                                        <iframe key={index}
-                                            className='animate__animated animate__fadeIn animate__delay-1s'
-                                            title={nft?.name}
-                                            src={path}
-                                            allow='fullscreen; picture-in-picture;'
-                                        >
-                                            Your browser does not support iframe.
-                                            <a href={path} target='_blank' rel='noreferrer'>See content here</a>
-                                        </iframe>
-                                )
-                            })}
+    if (isConnected)
+        return (
+            <div className={styles.container} onClick={minimizeAll}>
+                <NavBar />
+                <main className={styles.main}>
+                    {showRobbo ?
+                        <div id='user-avatar-container' className={`${styles.imgContainer}`}>
+                            {avatar ? 
+                                <Image 
+                                    src={avatar}
+                                    alt='User random generated avatar'
+                                    width={250}
+                                    height={300}
+                                /> 
+                            :   null}
+                            <span className={styles.address}>#{address}</span>
                         </div>
-                    </>
-                }
-            </main>
-        </div>
+                    :   <>
+                            <h1 className={`${styles.address} ${styles.header}`}>NFTS</h1>
+                            <div className={styles.nftsContainer}>
+                                {nfts.map((nft, index) => {
+                                    const path = nft?.file_url.replace('ipfs://', 'https://ipfs.io/ipfs/')
+                                    return (
+                                        isImageUrl(path) ?
+                                            <div
+                                                key={index}
+                                                className={`${styles.frame} animate__animated animate__fadeIn animate__delay-1s`}
+                                            >
+                                                <Image 
+                                                    src={path}
+                                                    alt={nft?.name}
+                                                    width={246}
+                                                    height={154}
+                                                />
+                                                <span onClick={maximizeImg} className='max'><CgMaximize /></span>
+                                            </div>
+                                        : 
+                                            <iframe key={index}
+                                                className='animate__animated animate__fadeIn animate__delay-1s'
+                                                title={nft?.name}
+                                                src={path}
+                                                allow='fullscreen; picture-in-picture;'
+                                            >
+                                                Your browser does not support iframe.
+                                                <a href={path} target='_blank' rel='noreferrer'>See content here</a>
+                                            </iframe>
+                                    )
+                                })}
+                            </div>
+                        </>
+                    }
+                </main>
+            </div>
+        )
+    else return (
+        <main className={styles.main}><span className={styles.address}>404</span></main>
     )
 }
 
