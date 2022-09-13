@@ -1,0 +1,131 @@
+.container {
+    padding: 0 2rem;
+}
+
+.main {
+    width: 80vw;
+    margin: auto;
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.imgContainer img {
+    width: 100% !important;
+    height: 100% !important;
+    filter: drop-shadow(1.5px 3.5px 1.5px rgba(50, 50, 50, 0.45));
+}
+
+.address {
+    max-width: 6.2ch;
+    color: rgba(124, 131, 253);
+    font-weight: bold;
+    font-size: 1.7em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 30vh;
+    filter: 
+        drop-shadow(2px 3.5px 5px rgba(19, 99, 223, 0.5))
+        drop-shadow(-1.5px -1px 1.5px rgba(19, 99, 223, 0.5))
+        drop-shadow(-1.5px -1px 2px rgba(19, 99, 223, 0.6))
+        drop-shadow(1.5px -1px 4px rgba(19, 99, 223, 0.6))
+        drop-shadow(1.5px -1px 4px rgba(255, 255, 255, 0.25))
+    ;
+}
+
+.header {
+    position: sticky;
+    top: 30vh;
+}
+
+@media (min-width: 750px) {
+    .address {
+        top: 45.5vh
+    }
+}
+
+.nftsContainer {
+    display: flex;
+    width: 60vw;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nftsContainer iframe, .frame {
+    width: 246px;
+    margin: 5.5% 2%;
+    transform: rotateY(35deg);
+    border: 2px inset rgba(19, 99, 223, 0.4);
+    border-top: 3px outset rgba(19, 99, 223, 0.4);
+    border-radius: 10px;
+    box-shadow:
+        16px 10px 5px -3px rgba(0, 0, 0, 0.3),
+        11px -10px 5px -3px rgba(0, 0, 0, 0.3),
+        13px 10px 5px -3px rgba(115, 115, 115,0.3),
+        0px 10px 5px -3px rgba(115, 115, 115, 0.1),
+        0px 10px 15px -3px rgba(19, 99, 223, 0.3),
+        0px 10px 15px -3px rgba(19, 99, 223, 0.3)
+    ;
+}
+
+.frame {
+    width: 246px;
+    height: 154px;
+}
+
+.frame img {
+    object-fit: cover !important;
+    border-radius: 10px;
+}
+
+.frame svg {
+    position: relative;
+    top: -3em;
+    left: calc(100% - 14%);
+    pointer-events: all;
+}
+
+.clickedFrame {
+    position: fixed;
+    top: calc(50vh - 154px + 11%);
+    width: 90vw;
+    height: 223px;
+    margin: 0;
+    z-index: 200;
+}
+
+.clickedFrame img {
+    width: 100%;
+    height: 223px;
+    object-fit: initial !important;
+}
+
+@media (min-width: 750px) {
+    .clickedFrame {
+        top: 11vh;
+        width: 80vw;
+        height: 85vh;
+        border-top: 2px inset rgba(19, 99, 223, 0.4);
+    }
+
+    .clickedFrame img {
+        height: 85vh;
+        position: fixed !important;
+        object-fit: cover;
+    }
+}

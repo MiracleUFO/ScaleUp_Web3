@@ -1,19 +1,33 @@
 import type { NextComponentType } from 'next'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+import { useAccount } from 'wagmi'
 
 import { FaUserAstronaut } from 'react-icons/fa'
 import { BiHomeSmile } from 'react-icons/bi'
 
-import styles from '../styles/Nav.module.css';
+import styles from '../styles/Nav.module.css'
 
 const NavBar: NextComponentType = () => {
-    const router = useRouter()
-    console.log(router)
+    const { pathname }= useRouter()
+    const { isConnected } = useAccount()
+
     return (
-        <nav className={styles.nav}>
-            <span><BiHomeSmile /></span>
-            <span><FaUserAstronaut /></span>
-        </nav>
+        <>
+            {isConnected ?
+                <nav className={`${styles.nav} animate__animated animate__fadeInLeft animate__delay-2s`}>
+                    <Link href='/'>
+                        <span className={pathname === '/' ? styles.active : ''} title='home'><BiHomeSmile /></span>
+                    </Link>
+                    
+                    <Link href='/user'>
+                        <span className={pathname === '/user' ? styles.active : ''} title='user'><FaUserAstronaut /></span>
+                    </Link>
+                </nav>
+                :   null
+            }
+        </>
     )
 }
 

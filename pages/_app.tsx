@@ -7,6 +7,7 @@ import { publicProvider } from 'wagmi/providers/public'
 
 import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
+import { useEffect, useState } from 'react'
 
 const { chains, provider } = configureChains(
   [chain.mainnet],
@@ -23,23 +24,29 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'ScaleUp Web3',
+  appName: 'scaleUp-web3',
   chains,
 });
 
-const wagmiClient = createClient({
-  autoConnect: false,
-  connectors,
-  provider,
-});
-
 function MyApp({ Component, pageProps }: AppProps) {
+  const [client, setClient] = useState<any>()
+  useEffect(() =>
+    setClient(createClient(
+      {
+        autoConnect: true,
+        connectors,
+        provider,
+      })
+    )
+  , [])
+
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+      client &&
+        <WagmiConfig client={client}>
+          <RainbowKitProvider chains={chains} theme={darkTheme()} coolMode>
+            <Component {...pageProps} />
+          </RainbowKitProvider>
+        </WagmiConfig>
   );
 }
 

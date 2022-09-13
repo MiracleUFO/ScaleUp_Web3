@@ -13,14 +13,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <title>ScaleUp Web3</title>
-        <meta name='description' content='Web3 NFT retrieval app' />
-        <link rel='icon' href='/logo.png' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' />
-        {
-          // eslint-disable-next-line @next/next/no-page-custom-font
-          <link href='https://fonts.googleapis.com/css2?family=Rubik&display=swap' rel='stylesheet' />
-        }
+        <meta name='description' content='Web3 NFT retrieval app home page' />
       </Head>
 
       <>
@@ -29,7 +22,7 @@ const Home: NextPage = () => {
           <div>
             <h1 className='animate__animated animate__fadeInLeft'>Learn Web3 with ScaleUp</h1>
             <p className='animate__animated animate__fadeInLeft animate__delay-1s'>Fast track your career, join ScaleUp Web3 and <br /> improve your skills.</p>
-            <ConnectButton />
+            <ConnectButton showBalance={false} />
           </div>
           <div>
             <Image
@@ -39,6 +32,7 @@ const Home: NextPage = () => {
               height='100%'
               layout='responsive'
               objectFit='contain'
+              priority
             />
           </div>
         </main>
