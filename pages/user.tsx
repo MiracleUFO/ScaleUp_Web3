@@ -31,9 +31,10 @@ const User: NextPage = () => {
     //  Gets user's avatar
     useEffect(() => {
         if (address && isConnected) {
+            const seed = (address === localStorageWalletAddress) ? 'robbo' : JSON.stringify(randomSeed())
             const svg =
                 createAvatar(style, {
-                    seed: address === localStorageWalletAddress ? 'robbo' : JSON.stringify(randomSeed()),
+                    seed: seed,
                     dataUri: true
                 })
             if (svg) setAvatar(svg)
@@ -87,7 +88,7 @@ const User: NextPage = () => {
         }
     }, [nfts.length])
 
-    //  minimizes) nft images when img loses focus
+    //  minimizes nft images when img loses focus
     const minimizeAll = useCallback((): void => {
         const imgs = Array.from(document.getElementsByClassName(styles.clickedFrame) as HTMLCollectionOf<HTMLElement>)
         imgs.forEach((img) => {
