@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/future/image'
 
 import { useState, useEffect, useCallback } from 'react'
 
@@ -11,10 +12,8 @@ import { buildspacev2, learnweb3 } from '../constants/contractAddresses'
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-bottts-sprites';
 
-import { CgMaximize } from 'react-icons/cg'
-import Image from 'next/future/image'
-
 import NavBar from '../components/NavBar'
+import { CgMaximize } from 'react-icons/cg'
 
 import styles from '../styles/User.module.css'
 import 'animate.css'
@@ -83,7 +82,7 @@ const User: NextPage = () => {
         }
     }, [nfts.length])
 
-    //  minimizes nft images when img loses focus
+    //  Minimizes NFT images when img loses focus
     const minimizeAll = useCallback((): void => {
         const imgs = Array.from(document.getElementsByClassName(styles.clickedFrame) as HTMLCollectionOf<HTMLElement>)
         imgs.forEach((img) => {
@@ -94,7 +93,7 @@ const User: NextPage = () => {
         })
     }, [])
 
-    //  maximizes nft images on click max icon
+    //  Maximizes NFT images on click max icon
     const maximizeImg = useCallback((e: any): void => {
         e.stopPropagation()
         minimizeAll()
@@ -104,6 +103,7 @@ const User: NextPage = () => {
         }
     },[minimizeAll])
 
+    //  JSX Template
     if (isConnected)
         return (
             <div className={styles.container} onClick={minimizeAll}>
@@ -112,7 +112,7 @@ const User: NextPage = () => {
                 </Head>
 
                 <NavBar />
-                
+
                 <main className={styles.main}>
                     {showRobbo ?
                         <div id='user-avatar-container' className={`${styles.imgContainer}`}>
