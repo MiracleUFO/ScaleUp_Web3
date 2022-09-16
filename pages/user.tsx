@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
+
 import { useState, useEffect, useCallback } from 'react'
 
 import { useAccount } from 'wagmi'
@@ -105,7 +107,12 @@ const User: NextPage = () => {
     if (isConnected)
         return (
             <div className={styles.container} onClick={minimizeAll}>
+                <Head>
+                    <title>ScaleUp Web3 User Page</title>
+                </Head>
+
                 <NavBar />
+                
                 <main className={styles.main}>
                     {showRobbo ?
                         <div id='user-avatar-container' className={`${styles.imgContainer}`}>
