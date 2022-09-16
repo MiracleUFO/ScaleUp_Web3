@@ -24,23 +24,20 @@ const User: NextPage = () => {
     const [showRobbo, setShowRobbo] = useState(true)
 
     const { address, isConnected } = useAccount()
-    const localStorageWalletAddress = window.localStorage.getItem('scaleup_web3')
 
     const isImageUrl = require('is-image-url')
 
     //  Gets user's avatar
     useEffect(() => {
         if (address && isConnected) {
-            const seed = (address === localStorageWalletAddress) ? 'robbo' : JSON.stringify(randomSeed())
             const svg =
                 createAvatar(style, {
-                    seed: seed,
+                    seed: address,
                     dataUri: true
                 })
             if (svg) setAvatar(svg)
-            window.localStorage.setItem('scaleup_web3', address)
         }
-    }, [address, isConnected, localStorageWalletAddress])
+    }, [address, isConnected])
 
     //  Retrieves user's NFTS
     const getUsersNFTs = useCallback(async () => {
@@ -72,12 +69,9 @@ const User: NextPage = () => {
 
     //  Calls getUsersNFTs if account address is valid
     useEffect(() => {
-        const isValidAddress = 
-            address === JSON.parse(JSON.stringify(localStorageWalletAddress)) && 
-            utils.isAddress(JSON.parse(JSON.stringify(localStorageWalletAddress)))
-        
+        const isValidAddress = utils.isAddress(JSON.parse(JSON.stringify(address)))
         if (isValidAddress) getUsersNFTs()
-    }, [address, getUsersNFTs, localStorageWalletAddress])
+    }, [address, getUsersNFTs])
 
     //  Slowly fades out user robbo avatar after nfts load
     useEffect(() => {
