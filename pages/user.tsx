@@ -5,7 +5,6 @@ import { useAccount } from 'wagmi'
 import { utils } from 'ethers'
 
 import { buildspacev2, learnweb3 } from '../constants/contractAddresses'
-import { randomSeed } from '../helpers/randomSeed'
 
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-bottts-sprites';
