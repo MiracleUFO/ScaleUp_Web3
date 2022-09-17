@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/future/image'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, MouseEvent } from 'react'
 
 import { useAccount } from 'wagmi'
 import { utils } from 'ethers'
@@ -20,7 +20,7 @@ import 'animate.css'
 
 const User: NextPage = () => {
     const [avatar, setAvatar]= useState('')
-    const [nfts, setNfts] = useState<any[]>([])
+    const [nfts, setNfts] = useState<Nfts[]>([])
     const [showRobbo, setShowRobbo] = useState(true)
 
     const { address, isConnected } = useAccount()
@@ -50,6 +50,7 @@ const User: NextPage = () => {
                 }
             }
         ))
+
         const baseUrl = `https://api.nftport.xyz/v0/accounts/${address}?chain=polygon&contract_address=`
         const buildspaceNfts = 
             await fetch(`${baseUrl}${buildspacev2}`, options)
@@ -62,7 +63,21 @@ const User: NextPage = () => {
                     await fetch(`${baseUrl}${learnweb3}`, options)
                         .then(res => res.json())
                         .catch(err => console.log(err))
-                setNfts(buildspaceNfts.nfts.concat(learnweb3Nfts.nfts))
+                
+                //  Format NFT to Nft type
+                const allNfts = buildspaceNfts.nfts.concat(learnweb3Nfts.nfts).map(({
+                    description,
+                    file_url,
+                    name,
+                    ...rest
+                }: {
+                    description: string,
+                    file_url: string,
+                    name: string
+                }) => {
+                    return {name, file_url, description}
+                })
+                setNfts(allNfts)
             }
         }, 1000)
     },  [address])
@@ -76,6 +91,7 @@ const User: NextPage = () => {
     //  Slowly fades out user robbo avatar after nfts load
     useEffect(() => {
         if (nfts.length) {
+            console.log('stuff')
             const classes = 'animate__animated animate__fadeOut animate__delay-2s'.split(' ')
             document.getElementById('user-avatar-container')?.classList.add(...classes)
             setTimeout(() => setShowRobbo(false), 2500)
@@ -94,12 +110,15 @@ const User: NextPage = () => {
     }, [])
 
     //  Maximizes NFT images on click max icon
-    const maximizeImg = useCallback((e: any): void => {
+    const maximizeImg = useCallback((e: MouseEvent<HTMLElement>): void => {
         e.stopPropagation()
         minimizeAll()
-        if (e.target.parentElement.parentElement.childNodes[1]?.style) {
-            e.target.parentElement.parentElement.classList.add(styles.clickedFrame)
-            e.target.parentElement.parentElement.childNodes[1].style.display = 'none'
+
+        const target = e.target as HTMLElement
+        const parentChildNodes = target!.parentNode!.parentNode!.children as HTMLCollectionOf<HTMLElement>
+        if (parentChildNodes[1]?.style) {
+            target!.parentElement!.parentElement!.classList.add(styles.clickedFrame)
+            parentChildNodes[1]!.style.display = 'none'
         }
     },[minimizeAll])
 
@@ -140,6 +159,7 @@ const User: NextPage = () => {
                                                 <Image 
                                                     src={path}
                                                     alt={nft?.name}
+                                                    title={nft?.description}
                                                     width={246}
                                                     height={154}
                                                 />
